@@ -15,7 +15,7 @@
             padding: 20px;
             border-radius: 10px;
         }
-        #nameResult {
+        #nameResult, #history {
             font-size: 18px;
             font-weight: bold;
             color: white !important;
@@ -42,7 +42,10 @@
     <p>Select name type:</p>
     <button onclick="generateName('male')">Male Name</button>
     <button onclick="generateName('female')">Female Name</button>
+    <button onclick="clearHistory()">Clear History</button>
     <p id="nameResult">🎲 Choose a name type to generate</p>
+    <h3>Generated Names:</h3>
+    <ul id="history"></ul>
 
     <script>
         const malePrefixes = [
@@ -72,17 +75,32 @@
         ];
 
         function generateName(type) {
-            let first, suffix;
+            let first, suffix, father, finalName;
 
             if (type === 'male') {
                 first = malePrefixes[Math.floor(Math.random() * malePrefixes.length)];
                 suffix = maleSuffixes[Math.floor(Math.random() * maleSuffixes.length)];
+                finalName = `${first}${suffix} son of ${first}${maleSuffixes[Math.floor(Math.random() * maleSuffixes.length)]}`;
             } else {
                 first = femalePrefixes[Math.floor(Math.random() * femalePrefixes.length)];
                 suffix = femaleSuffixes[Math.floor(Math.random() * femaleSuffixes.length)];
+                father = malePrefixes[Math.floor(Math.random() * malePrefixes.length)] + maleSuffixes[Math.floor(Math.random() * maleSuffixes.length)];
+                finalName = `${first}${suffix} daughter of ${father}`;
             }
 
-            document.getElementById("nameResult").innerHTML = `✨ Your name: ${first}${suffix} ✨`;
+            document.getElementById("nameResult").innerHTML = `✨ Your name: ${finalName} ✨`;
+            saveHistory(finalName);
+        }
+
+        function saveHistory(name) {
+            let historyList = document.getElementById("history");
+            let listItem = document.createElement("li");
+            listItem.textContent = name;
+            historyList.appendChild(listItem);
+        }
+
+        function clearHistory() {
+            document.getElementById("history").innerHTML = "";
         }
     </script>
 
