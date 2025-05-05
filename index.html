@@ -15,14 +15,14 @@
             padding: 20px;
             border-radius: 10px;
         }
-        #nameResult, #history {
-            font-size: 18px;
+        #nameResult {
+            font-size: 22px;
             font-weight: bold;
-            color: white !important;
+            color: #FFD700;
             margin-top: 10px;
         }
         button {
-            padding: 8px 15px;
+            padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
             border: none;
@@ -80,15 +80,15 @@
             if (type === 'male') {
                 first = malePrefixes[Math.floor(Math.random() * malePrefixes.length)];
                 suffix = maleSuffixes[Math.floor(Math.random() * maleSuffixes.length)];
-                finalName = `${first}${suffix} son of ${first}${maleSuffixes[Math.floor(Math.random() * maleSuffixes.length)]}`;
+                finalName = `${first}${suffix}, son of ${first}${maleSuffixes[Math.floor(Math.random() * maleSuffixes.length)]}`;
             } else {
                 first = femalePrefixes[Math.floor(Math.random() * femalePrefixes.length)];
                 suffix = femaleSuffixes[Math.floor(Math.random() * femaleSuffixes.length)];
                 father = malePrefixes[Math.floor(Math.random() * malePrefixes.length)] + maleSuffixes[Math.floor(Math.random() * maleSuffixes.length)];
-                finalName = `${first}${suffix} daughter of ${father}`;
+                finalName = `${first}${suffix}, daughter of ${father}`;
             }
 
-            document.getElementById("nameResult").innerHTML = `✨ Your name: ${finalName} ✨`;
+            document.getElementById("nameResult").innerHTML = `✨ ${finalName} ✨`;
             saveHistory(finalName);
         }
 
