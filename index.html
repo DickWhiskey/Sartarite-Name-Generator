@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sartarite Name Generator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap');
+
+        body {
+            font-family: 'Uncial Antiqua', cursive;
+            text-align: center;
+            margin: 10px;
+            background-color: black;
+            color: white;
+            font-size: 16px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        #nameResult {
+            font-size: 18px;
+            font-weight: bold;
+            color: white !important;
+            margin-top: 10px;
+        }
+        button {
+            padding: 8px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #0078D7;
+            color: white;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 style="font-size: 18px;">⚔️ Sartarite Name Generator</h2>
+    <p>Select name type:</p>
+    <button onclick="generateName('male')">Male Name</button>
+    <button onclick="generateName('female')">Female Name</button>
+    <p id="nameResult">🎲 Choose a name type to generate</p>
+
+    <script>
+        const malePrefixes = [
+            "Ar", "Bren", "Cal", "Dor", "Fen", "Gar", "Har", "Jor", "Kar", "Lor",
+            "Mar", "Nor", "Or", "Per", "Quen", "Rik", "Sor", "Tar", "Ulf", "Ven", "Yan",
+            "Der", "Kor", "Hel", "Varn", "Thal", "Yorin", "Tor", "Ivar", "Odan", "Fent"
+        ];
+        const maleSuffixes = [
+            "-dor", "-ven", "-kar", "-val", "-dros", "-drinor", "-staval", "-restos", "-gul", "-ostis",
+            "-and", "-arl", "-brast", "-dath", "-daral", "-dovar", "-ganvar", "-gor", "-gradus", "-harl"
+        ];
+
+        const femalePrefixes = [
+            "A(r)", "Dara", "Davor", "Der", "Dor", "Dush", "Ent", "Erin", "Ernal", "Esra",
+            "Esrol", "Feren", "Har", "Hend", "In", "Ivarn", "Jareen", "Jarnarn", "Jen", "Kal",
+            "Ken", "Leika", "Lon(d)", "Mern", "Mir", "Morgan", "Natal", "Nesrest", "Ondur", "Onel",
+            "Oran", "Or(a/i)", "Samast", "Sen(ren)", "Sora", "Seren", "Vasan", "Yan"
+        ];
+        const femaleSuffixes = [
+            "-a", "-ala", "-ali", "-ana", "-asa", "-ava", "-dessa", "-destra", "-dinna", "-dira",
+            "-drella", "-durisa", "-ela", "-erlanda", "-est", "-eth", "-eva", "-gala", "-i", "-ias",
+            "-illa", "-ina", "-ioth", "-ira", "-isen", "-ir", "-karne", "-lartha", "-randa", "-renava",
+            "-sin", "-sta", "-sulva", "-vala", "-vali", "-ya", "-yana", "-yara"
+        ];
+
+        function generateName(type) {
+            let first, suffix;
+
+            if (type === 'male') {
+                first = malePrefixes[Math.floor(Math.random() * malePrefixes.length)];
+                suffix = maleSuffixes[Math.floor(Math.random() * maleSuffixes.length)];
+            } else {
+                first = femalePrefixes[Math.floor(Math.random() * femalePrefixes.length)];
+                suffix = femaleSuffixes[Math.floor(Math.random() * femaleSuffixes.length)];
+            }
+
+            document.getElementById("nameResult").innerHTML = `✨ Your name: ${first}${suffix} ✨`;
+        }
+    </script>
+
+</body>
+</html>
