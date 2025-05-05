@@ -74,18 +74,49 @@
             "sin", "sta", "sulva", "vala", "vali", "ya", "yana", "yara"
         ];
 
+        // Helper to get a random element from an array
+        function randomFromArray(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        // Generate a father's name with a 60% chance to share the prefix
+        function generateFatherName(childFullName) {
+            const usePrefix = Math.random() < 0.6;
+            let fatherPrefix;
+
+            // Use the first 3 letters of the child's name as the "prefix"
+            const childPrefix = childFullName.slice(0, 3);
+
+            if (usePrefix) {
+                // Find a malePrefix that starts with the child's prefix
+                const matchingPrefixes = malePrefixes.filter(p => p.startsWith(childPrefix));
+                if (matchingPrefixes.length > 0) {
+                    fatherPrefix = randomFromArray(matchingPrefixes);
+                } else {
+                    fatherPrefix = randomFromArray(malePrefixes);
+                }
+            } else {
+                fatherPrefix = randomFromArray(malePrefixes);
+            }
+            const fatherSuffix = randomFromArray(maleSuffixes);
+            return fatherPrefix + fatherSuffix;
+        }
+
         function generateName(type) {
             let first, suffix, father, finalName;
 
             if (type === 'male') {
-                first = malePrefixes[Math.floor(Math.random() * malePrefixes.length)];
-                suffix = maleSuffixes[Math.floor(Math.random() * maleSuffixes.length)];
-                finalName = `${first}${suffix}, son of ${first}${maleSuffixes[Math.floor(Math.random() * maleSuffixes.length)]}`;
+                first = randomFromArray(malePrefixes);
+                suffix = randomFromArray(maleSuffixes);
+                let childFullName = first + suffix;
+                father = generateFatherName(childFullName);
+                finalName = `${childFullName}, son of ${father}`;
             } else {
-                first = femalePrefixes[Math.floor(Math.random() * femalePrefixes.length)];
-                suffix = femaleSuffixes[Math.floor(Math.random() * femaleSuffixes.length)];
-                father = malePrefixes[Math.floor(Math.random() * malePrefixes.length)] + maleSuffixes[Math.floor(Math.random() * maleSuffixes.length)];
-                finalName = `${first}${suffix}, daughter of ${father}`;
+                first = randomFromArray(femalePrefixes);
+                suffix = randomFromArray(femaleSuffixes);
+                let childFullName = first + suffix;
+                father = generateFatherName(childFullName);
+                finalName = `${childFullName}, daughter of ${father}`;
             }
 
             document.getElementById("nameResult").innerHTML = `✨ ${finalName} ✨`;
